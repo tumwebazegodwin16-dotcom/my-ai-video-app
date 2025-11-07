@@ -129,10 +129,10 @@ export default function UploadPage() {
       const formData = new FormData();
       formData.append("file", selectedFile);
       formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("category", data.category);
-      formData.append("duration", data.duration || "");
-      formData.append("thumbnailUrl", data.thumbnailUrl || "");
+      formData.append("description", data.description || "");
+      formData.append("category", data.category || "Other");
+      formData.append("duration", data.duration ?? "");
+      formData.append("thumbnailUrl", data.thumbnailUrl ?? "");
 
       const xhr = new XMLHttpRequest();
 
@@ -236,7 +236,7 @@ export default function UploadPage() {
                                 size="icon"
                                 onClick={() => {
                                   setSelectedFile(null);
-                                  form.setValue("file", null);
+                                  form.setValue("file", undefined as any);
                                 }}
                                 data-testid="button-remove-file"
                               >
@@ -366,6 +366,7 @@ export default function UploadPage() {
                           <Input
                             placeholder="e.g., 2h 15m"
                             {...field}
+                            value={field.value ?? ""}
                             data-testid="input-duration"
                           />
                         </FormControl>
@@ -385,6 +386,7 @@ export default function UploadPage() {
                         <Input
                           placeholder="Enter thumbnail image URL"
                           {...field}
+                          value={field.value ?? ""}
                           data-testid="input-thumbnail"
                         />
                       </FormControl>

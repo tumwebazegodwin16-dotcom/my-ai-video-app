@@ -50,6 +50,10 @@ export class MemStorage implements IStorage {
       ...insertVideo,
       id,
       uploadDate: new Date(),
+      category: insertVideo.category || "Other",
+      description: insertVideo.description || "",
+      duration: insertVideo.duration || null,
+      thumbnailUrl: insertVideo.thumbnailUrl || null,
     };
     this.videos.set(id, video);
     return video;
